@@ -24,3 +24,5 @@ Route::get('/test', [TestController::class, 'test']);
 /* Auth::routes(); */
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Route::get('/test-api', [TestApiController::class, "test-api"])
