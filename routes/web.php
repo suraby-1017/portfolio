@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +20,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
+    Route::post('/login', [LoginController::class, 'login']);
+});
 
-Route::get('/test', [TestController::class, 'test']);
 
-/* Auth::routes(); */
+/* 簡略　ログインしているユーザーのみがprofile画面を見れるように */
+Route::middleware('auth')->group(function () {
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
+});
+
+/* 登録画面 */
+Route::get('/register', [UserController::class, 'showRegister']);
+/* */
+Route::post('/register', [UserController::class, 'register']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::get('/test-api', [TestApiController::class, "test-api"])
