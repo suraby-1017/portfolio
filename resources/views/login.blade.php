@@ -11,6 +11,7 @@
 </head>
 <body>
     <form>
+        @csrf
         <h1><img src="img/account-icon.png" alt="ログイン"/></h1>
         <p><input type="email" placeholder="メールアドレス" required autofocus></p>
         <p><input type="password" placeholder="パスワード" required></p>

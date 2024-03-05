@@ -16,6 +16,10 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+
+                <div class="card-body">{{-- これを増やして機能を開発を進めていく --}}
+                    <a href="">user</a>
+                </div>
             </div>
         </div>
     </div>
