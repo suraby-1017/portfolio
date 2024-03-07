@@ -3,7 +3,6 @@
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +19,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+/* ログイン機能のルート */
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
@@ -34,8 +35,7 @@ Route::middleware('auth')->group(function () {
 
 /* 登録画面 */
 Route::get('/register', [UserController::class, 'showRegister']);
-/* */
 Route::post('/register', [UserController::class, 'register']);
-
+/* ホーム画面 */
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-// use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
@@ -25,7 +23,7 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             /* アプリケーション内で使わないためハッシュ化してパスワードを認証 */
-            /* ↑パスワード漏洩対策 */
+            // *パスワード漏洩対策
             'password' => Hash::make($request['password'])
         ]);
         /* 'Auth'関数で現在認証しているユーザーを取得 */
