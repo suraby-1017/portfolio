@@ -38,3 +38,4 @@ Route::get('/register', [UserController::class, 'showRegister']);
 Route::post('/register', [UserController::class, 'register']);
 /* ホーム画面 */
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
