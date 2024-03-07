@@ -18,6 +18,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // 認証成功時の処理
+            // session fixation 対策として　セッションを再生成
+            $request->session()->regenerate();
             return redirect()->intended(route('profile.show'));
         }
 
@@ -25,6 +27,7 @@ class LoginController extends Controller
         return redirect()->back()->withErrors(['login' => 'Authentication failed']);
     }
 
+    /* ログアウト機能 */
     public function logout()
     {
         Auth::logout();

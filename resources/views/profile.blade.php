@@ -9,5 +9,9 @@
 </head>
 <body>
     {{\Illuminate\Support\Facades\Auth::user()->name}}でログインしています。
+
+    <div class="card-body">
+        <a href="{{ route('home') }}">home</a>
+    </div>
 </body>
 </html>
