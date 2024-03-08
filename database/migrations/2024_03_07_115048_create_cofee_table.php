@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('base');
-            $table->string('flavor');
             $table->integer('sweetness_level');
             $table->integer('bitterness_level');
             $table->timestamps();
