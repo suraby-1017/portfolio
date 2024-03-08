@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cofee', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('base');
             $table->string('flavor');
             $table->integer('sweetness_level');
