@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -38,4 +39,5 @@ Route::get('/register', [UserController::class, 'showRegister']);
 Route::post('/register', [UserController::class, 'register']);
 /* ホーム画面 */
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+/* 検索画面 */
+Route::get('/coffee', [CoffeeController::class, 'search'])->name('coffee');
