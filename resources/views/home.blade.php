@@ -18,8 +18,9 @@
                 </div>
 
                 <div class="card-body">{{-- これを増やして機能を開発を進めていく --}}
-                    <a href="">user</a>
+                    <a href="{{ route('coffee.index')}}">Coffee Menu 一覧</a>
                 </div>
+
             </div>
         </div>
     </div>

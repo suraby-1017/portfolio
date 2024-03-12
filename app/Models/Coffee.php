@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Coffee extends Model
 {
     use HasFactory;
+    // createメソッドを使用しないのでプロパティの指定なし
 }
