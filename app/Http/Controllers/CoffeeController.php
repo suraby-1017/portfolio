@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Coffee;
 use Illuminate\Http\Request;
+use views\edit;
 // Lrravel logdebug
 use Illuminate\Support\Facades\Log;
 
@@ -31,4 +32,13 @@ class CoffeeController extends Controller
 
         return view('coffee', compact('posts', 'keyword'));
     }
-};
+
+    //アクションの引数にルートから送られてきたパラメータ{id}を設定
+    public function edit($id)
+    {
+        //パラメータ$idをアクション内で使用出来る
+        // パラメーターを元にfindで該当のデータを再取得
+        $post = Coffee::find($id);
+        return view('edit')->with('post', $post);
+    }
+}

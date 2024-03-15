@@ -41,5 +41,6 @@ Route::post('/register', [UserController::class, 'register']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // 検索画面
 Route::get('/coffee/list', [CoffeeController::class, 'search'])->name('coffee.index');/* 一覧表示 */
-// Menu詳細画面
-// Route::get('/coffee/edit',[CoffeeController::class,'edit'])->name('coffee.edit');
+// 詳細画面
+// パラメーター{id}を設定
+Route::get('/edit/{id}', [CoffeeController::class, 'edit']);

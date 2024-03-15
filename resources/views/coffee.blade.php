@@ -24,23 +24,31 @@
 
   <table>
     <tr>
-      <th>メニュー名</th><th>ベース</th><th>甘さ</th><th>苦さ</th>
+      <th>メニュー名</th>
+      <th>ベース</th>
+      <th>甘さ</th>
+      <th>苦さ</th>
+      <th></th>
     </tr>
 
   {{-- 保存されているレコードを一覧表示 --}}
-  <form action="">
     @forelse ($posts as $post)
       <tr>
-        <td>{{ $post->name }}</td>
+        <td>
+          {{-- 「http:(ドメイン)/edit/{id}」 へアクセスするリンクを作る --}}
+          <a href="/edit/{{ $post->id }}">
+            {{ $post->name }}
+          </a>
+        </td>
         <td>{{ $post->base }}</td>
         <td>{{ $post->sweetness_level }}</td>
         <td>{{ $post->bitterness_level }}</td>
-        <td><button type="submit">edit</button></td>
+        <td>
+        </td>
       </tr>
     @empty
       <td>No posts!!</td>
     @endforelse
-  </form>
   </table>
 
 </body>
