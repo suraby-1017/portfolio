@@ -39,5 +39,7 @@ Route::get('/register', [UserController::class, 'showRegister']);
 Route::post('/register', [UserController::class, 'register']);
 /* ホーム画面 */
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-/* 検索画面 */
-Route::get('/coffee', [CoffeeController::class, 'search'])->name('coffee');
+// 検索画面
+Route::get('/coffee/list', [CoffeeController::class, 'search'])->name('coffee.index');/* 一覧表示 */
+// Menu詳細画面
+// Route::get('/coffee/edit',[CoffeeController::class,'edit'])->name('coffee.edit');

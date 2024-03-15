@@ -4,24 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Models\Coffee;
 use Illuminate\Http\Request;
+// Lrravel logdebug
+use Illuminate\Support\Facades\Log;
 
 class CoffeeController extends Controller
 {
     public function search(Request $request)
-    {   /* 変数が宣言されていること、そして NULL とは異なることを検査する 'isset' */
-        if (isset($request->keyword)) {
-            /* 'where'で条件検索 */
-            $coffee = Coffee::where('name', $request->keyword)
-                /* 'orwhere'で'もしくは ' */
-                ->orWhere('base', $request->keyword)
-                ->get();
-        } else {
-            $coffee = Coffee::get();
+    {
+        // $request = new Request();
+        // $keyword に入力された値は 'keyword'に保管される　（Requestインスタンスのinputメソッド）
+        $keyword = $request->input('keyword');
+        // Log::debug($keyword);
+        // whereではなくqueryを使って見やすく
+        // $query は DBの'Coffee'からデータをとりだす
+        $query = Coffee::query();
+        // もし $keyword に値が入力されたら
+        if (isset($keyword)) {
+            // 取り出すデータの検索条件は 'name' or 'base'
+            // Log::info('if from enter program');
+            $query->where('name', 'LIKE', "%{$keyword}%")
+                ->orWhere('base', 'LIKE', "%{$keyword}%");
         }
 
-        return view('coffee', [
-            'coffee' => $coffee,
-            'keyword' => $request->keyword
-        ]);
+        $posts = $query->get();
+        // Log::debug($posts);
+
+        return view('coffee', compact('posts', 'keyword'));
     }
-}
+};
