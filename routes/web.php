@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CoffeeController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -41,5 +42,11 @@ Route::post('/register', [UserController::class, 'register']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // 検索画面
 Route::get('/coffee/list', [CoffeeController::class, 'search'])->name('coffee.index');/* 一覧表示 */
-// Menu詳細画面
-// Route::get('/coffee/edit',[CoffeeController::class,'edit'])->name('coffee.edit');
+// 詳細画面
+// パラメーター{id}を設定
+Route::get('/edit/{id}', [CoffeeController::class, 'edit']);
+
+// DBに画像データを保存
+Route::get('/form', [FormController::class, 'index'])->name('item.index');
+Route::get('/create', [FormController::class, 'create'])->name('item.create');
+Route::post('/store', [FormController::class, 'store'])->name('item.store');

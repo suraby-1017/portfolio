@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Coffee extends Model
 {
     use HasFactory;
-    // createメソッドを使用しないのでプロパティの指定なし
+
+    public $guarded = ['id', 'created_at'];
+
+    // protected $table = 'coffees';
+
+    protected $fillable = [
+        'image',
+    ];
 }
