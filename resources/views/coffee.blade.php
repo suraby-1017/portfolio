@@ -19,15 +19,13 @@
 
   <h1>
     <span>Coffee Menu</span>
-    {{-- <a href="{{ route('posts.create') }}">[Add]</a> --}}
+    <a href="{{ route('coffee.create') }}">{{ __('新規作成') }}</a>
   </h1>
 
   <table>
     <tr>
       <th>メニュー名</th>
       <th>ベース</th>
-      <th>甘さ</th>
-      <th>苦さ</th>
       <th></th>
     </tr>
 
@@ -35,15 +33,13 @@
     @forelse ($posts as $post)
       <tr>
         <td>
-          {{-- 「http:(ドメイン)/edit/{id}」 へアクセスするリンクを作る --}}
-          <a href="/edit/{{ $post->id }}">
+          {{-- 「http:(ドメイン)/coffee/{id}」 へアクセスするリンクを作る --}}
+          {{-- <a href="coffee/show/{{ $post->id }}"> --}}
+            <a href="{{route('coffee.show',['id'=>$post->id])}}">
             {{ $post->name }}
           </a>
         </td>
         <td>{{ $post->base }}</td>
-        <td>{{ $post->sweetness_level }}</td>
-        <td>{{ $post->bitterness_level }}</td>
-        <td>
         </td>
       </tr>
     @empty
