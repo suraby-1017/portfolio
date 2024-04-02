@@ -40,13 +40,25 @@ Route::get('/register', [UserController::class, 'showRegister']);
 Route::post('/register', [UserController::class, 'register']);
 /* ホーム画面 */
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-// 検索画面
-Route::get('/coffee/list', [CoffeeController::class, 'search'])->name('coffee.index');/* 一覧表示 */
+// 一覧画面 検索機能
+Route::get('/coffee/list', [CoffeeController::class, 'index'])->name('coffee.index');
+// 登録画面
+Route::get('coffee/create', [CoffeeController::class, 'create'])->name('coffee.create');
+// 登録処理
+Route::post('coffee/store', [CoffeeController::class, 'store'])->name('coffee.store');
 // 詳細画面
 // パラメーター{id}を設定
-Route::get('/edit/{id}', [CoffeeController::class, 'edit']);
-
+Route::get('coffee/show/{id}', [CoffeeController::class, 'show'])->name('coffee.show');
+// 編集画面
+// パラメーター{id}を設定
+Route::get('coffee/edit/{id}', [CoffeeController::class, 'edit'])->name('coffee.edit');
+// 更新処理
+Route::post('coffee/update/{id}', [CoffeeController::class, 'update'])->name('coffee.update');
+// 削除処理
+Route::post('coffee/destroy/{id}', [CoffeeController::class, 'destroy'])->name('coffee.destroy');
 // DBに画像データを保存
 Route::get('/form', [FormController::class, 'index'])->name('item.index');
 Route::get('/create', [FormController::class, 'create'])->name('item.create');
 Route::post('/store', [FormController::class, 'store'])->name('item.store');
+
+// 投稿機能
