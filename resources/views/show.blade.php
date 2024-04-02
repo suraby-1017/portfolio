@@ -26,7 +26,8 @@
 
   <div>
   画像
-  {{$coffee->image}}
+  {{-- Laravel10では"storage/"は"/public/storage"を指す --}}
+  <img src=" {{ asset('storage/' . $coffee->image) }} " width="150" alt="coffee-image">
   </div>
 
   <div>
