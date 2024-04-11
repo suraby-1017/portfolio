@@ -3,7 +3,7 @@
 
 <h1>編集</h1>
 
-<form method="POST" action="{{route('coffee.update',['id' =>$coffee->id])}}">
+<form method="POST" action="{{route('coffee.update',['id' =>$coffee->id])}}" enctype="multipart/form-data">
 @csrf
 
 <div>
@@ -28,7 +28,9 @@
 
 <div>
 画像
-<input type="text" name=image value="{{$coffee->image}}">
+{{-- <input type="text" name=image value="{{$coffee->image}}"> --}}
+<img src=" {{ asset('storage/' . $coffee->image) }} " width="150" alt="coffee-image">
+<input type="file" name="image" id="form-image">
 </div>
 
 <div>

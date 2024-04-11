@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Coffee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 // Lrravel logdebug
 use Illuminate\Support\Facades\Log;
+// Log::debug($posts);
+// Log::messege('Yes'); etc...
 
 class CoffeeController extends Controller
 {
@@ -45,7 +48,9 @@ class CoffeeController extends Controller
         $coffee->base = $request->input('base');
         $coffee->material = $request->input('material');
         $coffee->comment = $request->input('comment');
-        $coffee->image = $request->input('image');
+        // $coffee->image = $request->input('image');
+        // 画像アップロード
+        $coffee->image = $request->file('image')->store('img', 'public');
         $coffee->sweetness_level = $request->input('sweetness_level');
         $coffee->bitterness_level = $request->input('bitterness_level');
         //DBに保存
@@ -74,27 +79,43 @@ class CoffeeController extends Controller
 
     public function update(Request $request, $id)
     {
-        $coffee = Coffee::find($id);
+        try {
+            DB::beginTransaction();
 
-        $coffee->name = $request->input('name');
-        $coffee->base = $request->input('base');
-        $coffee->material = $request->input('material');
-        $coffee->comment = $request->input('comment');
-        $coffee->image = $request->input('image');
-        $coffee->sweetness_level = $request->input('sweetness_level');
-        $coffee->bitterness_level = $request->input('bitterness_level');
-        //DBに保存
-        $coffee->save();
+            $coffee = Coffee::find($id);
 
+            $coffee->name = $request->input('name');
+            $coffee->base = $request->input('base');
+            $coffee->material = $request->input('material');
+            $coffee->comment = $request->input('comment');
+            // $coffee->image = $request->input('image');
+            $coffee->image = $request->file('image')->store('img', 'public');
+            $coffee->sweetness_level = $request->input('sweetness_level');
+            $coffee->bitterness_level = $request->input('bitterness_level');
+            //DBに保存
+            $coffee->save();
+
+            DB::commit();
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+        }
         //処理が終わったらcoffee/listにリダイレクト
         return redirect('/coffee/list');
     }
 
     public function destroy($id)
     {
-        $coffee = Coffee::find($id);
+        try {
+            DB::beginTransaction();
 
-        $coffee->delete();
+            $coffee = Coffee::find($id);
+            $coffee->delete();
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
 
         return redirect('/coffee/list');
     }
