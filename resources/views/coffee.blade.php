@@ -20,6 +20,7 @@
   <h1>
     <span>Coffee Menu</span>
     <a href="{{ route('coffee.create') }}">{{ __('新規作成') }}</a>
+    <a href="{{ route('timeline.index') }}">{{ __('投稿一覧') }}</a>
   </h1>
 
   <table>

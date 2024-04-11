@@ -48,7 +48,6 @@ class CoffeeController extends Controller
         $coffee->base = $request->input('base');
         $coffee->material = $request->input('material');
         $coffee->comment = $request->input('comment');
-        // $coffee->image = $request->input('image');
         // 画像アップロード
         $coffee->image = $request->file('image')->store('img', 'public');
         $coffee->sweetness_level = $request->input('sweetness_level');
@@ -63,11 +62,11 @@ class CoffeeController extends Controller
     //アクションの引数にルートから送られてきたパラメータ{id}を設定
     public function show($id)
     {
-        //パラメータ$idをアクション内で使用出来る
+        // パラメータ$idをアクション内で使用出来る
         // パラメーターを元にfindで該当のデータを再取得
         $coffee = Coffee::find($id);
 
-        return view('show', compact('coffee'));
+        return view('coffee_show', compact('coffee'));
     }
 
     public function edit($id)
@@ -79,6 +78,7 @@ class CoffeeController extends Controller
 
     public function update(Request $request, $id)
     {
+        // トランザクション処理
         try {
             DB::beginTransaction();
 
@@ -88,7 +88,6 @@ class CoffeeController extends Controller
             $coffee->base = $request->input('base');
             $coffee->material = $request->input('material');
             $coffee->comment = $request->input('comment');
-            // $coffee->image = $request->input('image');
             $coffee->image = $request->file('image')->store('img', 'public');
             $coffee->sweetness_level = $request->input('sweetness_level');
             $coffee->bitterness_level = $request->input('bitterness_level');
@@ -106,6 +105,7 @@ class CoffeeController extends Controller
 
     public function destroy($id)
     {
+        // トランザクション処理
         try {
             DB::beginTransaction();
 

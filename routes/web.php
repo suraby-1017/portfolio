@@ -3,6 +3,7 @@
 use App\Http\Controllers\CoffeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TimelineController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -41,10 +42,10 @@ Route::post('/register', [UserController::class, 'register']);
 /* ホーム画面 */
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Coffee CRUD機能
+// Coffee CRUD
 Route::controller(CoffeeController::class)->group(function () {
     // 一覧画面 検索機能
-    Route::get('/coffee/list', 'index')->name('coffee.index');
+    Route::get('coffee/list', 'index')->name('coffee.index');
     // 登録画面
     Route::get('coffee/create', 'create')->name('coffee.create');
     // 登録処理
@@ -61,4 +62,21 @@ Route::controller(CoffeeController::class)->group(function () {
     Route::post('coffee/destroy/{id}', 'destroy')->name('coffee.destroy');
 });
 
-// 投稿機能
+// 投稿機能 CRUD
+Route::controller(TimelineController::class)->group(function () {
+    // 一覧表示機能
+    Route::get('timeline/list', 'showTimelinePage')->name('timeline.index');
+    // 投稿画面
+    Route::get('timeline/create', 'create')->name('timeline.create');
+    // 投稿機能
+    Route::post('timeline/store', 'store')->name('timeline.store');
+    // 詳細画面
+    Route::get('timeline/show{id}', 'show')->name('timeline.show');
+    // 編集画面
+    // パラメーター{id}を設定
+    Route::get('timeline/edit{id}', 'edit')->name('timeline.edit');
+    // 更新処理
+    Route::post('timeline/update{id}', 'update')->name('timeline.update');
+    // 削除処理
+    Route::post('timeline/destroy{id}', 'destroy')->name('timeline.destroy');
+});

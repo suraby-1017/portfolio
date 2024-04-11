@@ -28,7 +28,6 @@
 
 <div>
 画像
-{{-- <input type="text" name=image value="{{$coffee->image}}"> --}}
 <img src=" {{ asset('storage/' . $coffee->image) }} " width="150" alt="coffee-image">
 <input type="file" name="image" id="form-image">
 </div>
