@@ -30,7 +30,6 @@ class UserController extends Controller
         Auth::login($user);
 
         return Redirect::route('profile.show');
-        /* return redirect()->route('profile'); */
     }
 
 
