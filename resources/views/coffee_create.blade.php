@@ -41,6 +41,16 @@
     <input type="text" name="bitterness_level" id="form-bitterness_level">
 </div>
 
+@if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <button type="submit">登録</button>
 
 

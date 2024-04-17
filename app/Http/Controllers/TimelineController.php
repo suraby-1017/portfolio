@@ -25,8 +25,22 @@ class TimelineController extends Controller
         return view('timeline_create');
     }
 
-    public function sotre(Request $request)
+    public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'title' => ['required', 'unique:posts'],
+                'description' => ['required'],
+                'image_path' => ['required'],
+            ],
+            [
+                'title.required' => 'タイトルは必須です。',
+                'description.required' => '内容は必須です。',
+                'image_path.required' => '画像は必須です。',
+            ]
+        );
+
         $post = new Post();
 
         $post->user_id = Auth::user()->id;
@@ -58,6 +72,17 @@ class TimelineController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'title' => ['required', 'unique:posts'],
+                'description' => ['required'],
+            ],
+            [
+                'title.required' => 'タイトルは必須です。',
+                'description.required' => '内容は必須です。',
+            ]
+        );
+
         try {
             DB::beginTransaction();
 

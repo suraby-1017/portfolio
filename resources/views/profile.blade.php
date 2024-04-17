@@ -1,17 +1,27 @@
-<!doctype html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>プロフィール</title>
-</head>
-<body>
-    現在あなたは{{\Illuminate\Support\Facades\Auth::user()->name}}でログインしています。
+@extends('layouts.app')
+@section('content')
 
+<title>プロフィール</title>
+
+<h1>現在あなたは{{\Illuminate\Support\Facades\Auth::user()->name}}でログインしています。</h1>
+    @foreach($posts as $posts)
+    <div>
+        <a href="{{route('timeline.show',['id'=>$posts->id])}}">
+        {{ $posts->user_id }}
+        {{ $posts->title }}
+    </div>
+    <div>
+        <img src="{{ Storage::url($posts->image_path) }}" width="150" alt='image_path'>
+    </div>
+    @endforeach
+
+    <div>
+        <a href="{{ route('coffee.index') }}">{{ __('メニュー 一覧へ戻る') }}</a>
+    </div>
+    <div>
+        <a href="{{ route('timeline.index') }}">{{ __('投稿 一覧に戻る') }}</a>
+    </div>
     <div class="card-body">
         <a href="{{ route('home') }}">home</a>
     </div>
-</body>
-</html>
+@endsection

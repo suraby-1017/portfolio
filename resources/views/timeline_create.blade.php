@@ -3,6 +3,16 @@
 
 <h1>新規投稿</h1>
 
+@if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form method="POST" action="{{ route('timeline.store') }}" enctype="multipart/form-data">
 @csrf
 

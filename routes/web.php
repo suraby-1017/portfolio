@@ -22,12 +22,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* ユーザー登録画面 */
+Route::get('/register', [UserController::class, 'showRegister']);
+Route::post('/register', [UserController::class, 'register']);
+
 
 /* ログイン機能のルート */
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
     Route::post('/login', [LoginController::class, 'login']);
 });
+
+/* ホーム画面 */
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 /* 簡略　ログインしているユーザーのみがprofile画面を見れるように */
@@ -36,11 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile.show');
 });
 
-/* ユーザー登録画面 */
-Route::get('/register', [UserController::class, 'showRegister']);
-Route::post('/register', [UserController::class, 'register']);
-/* ホーム画面 */
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 // Coffee CRUD
 Route::controller(CoffeeController::class)->group(function () {
