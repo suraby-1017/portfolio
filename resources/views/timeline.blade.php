@@ -14,11 +14,11 @@
         <div>
             <div>
                 {{-- 「http:(ドメイン)/timeline/{id}」 へアクセスするリンクを作る --}}
-                <a href="{{route('timeline.show',['id'=>$posting->id])}}">
+                {{-- <a href="{{route('timeline.show',['id'=>$posting->id])}}"> --}}
                 {{ $posting->title }}</div>
                 </a>
             <div>
-                <img src="{{ Storage::url($posting->image_path) }}" width="150" alt='post_image'>
+                <img src="{{ Storage::url($posting->image_path) }}" width="150" alt='image_path'>
             </div>
         </div>
         @endforeach
@@ -26,6 +26,6 @@
 </div>
 
 <a href="{{ route('coffee.index') }}">{{ __('一覧へ戻る') }}</a>
-
+<a href="{{ route('profile.show') }}">{{ __('My プロフィール') }}</a>
 
 @endsection

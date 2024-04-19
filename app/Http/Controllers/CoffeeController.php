@@ -42,6 +42,21 @@ class CoffeeController extends Controller
 
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'title' => ['required', 'unique:posts'],
+                'sweetness_level' => ['required'],
+                'bitterness_level' => ['required'],
+            ],
+            [
+                'title.required' => 'タイトルは必須です。',
+                'image.required' => '画像は必須です。',
+                'sweetness_level.required' => '甘さは必須です。',
+                'bitterness_level.required' => '苦さは必須です。',
+            ]
+        );
+
         $coffee = new Coffee();
 
         $coffee->name = $request->input('name');
@@ -78,6 +93,20 @@ class CoffeeController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate(
+            [
+                'title' => ['required', 'unique:posts'],
+                'sweetness_level' => ['required'],
+                'bitterness_level' => ['required'],
+            ],
+            [
+                'title.required' => 'タイトルは必須です。',
+                'image.required' => '画像は必須です。',
+                'sweetness_level.required' => '甘さは必須です。',
+                'bitterness_level.required' => '苦さは必須です。',
+            ]
+        );
+
         // トランザクション処理
         try {
             DB::beginTransaction();
