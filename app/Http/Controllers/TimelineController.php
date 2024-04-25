@@ -32,7 +32,7 @@ class TimelineController extends Controller
             [
                 'title' => ['required', 'unique:posts'],
                 'description' => ['required'],
-                'image_path' => ['required'],
+                'image_path' => ['required', 'image'],
             ],
             [
                 'title.required' => 'タイトルは必須です。',
@@ -74,7 +74,7 @@ class TimelineController extends Controller
     {
         $request->validate(
             [
-                'title' => ['required', 'unique:posts'],
+                'title' => ['required'],
                 'description' => ['required'],
             ],
             [

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 // Log::debug($posts);
 // Log::messege('Yes'); etc...
+// todo 保留
+// use Intervention\Image\Facades\Image;
 
 class CoffeeController extends Controller
 {
@@ -46,8 +48,9 @@ class CoffeeController extends Controller
         $request->validate(
             [
                 'title' => ['required', 'unique:posts'],
-                'sweetness_level' => ['required'],
-                'bitterness_level' => ['required'],
+                'image' => ['required', 'image'],
+                'sweetness_level' => ['required', 'integer'],
+                'bitterness_level' => ['required', 'integer'],
             ],
             [
                 'title.required' => 'タイトルは必須です。',
@@ -65,6 +68,8 @@ class CoffeeController extends Controller
         $coffee->comment = $request->input('comment');
         // 画像アップロード
         $coffee->image = $request->file('image')->store('img', 'public');
+        // todo 画像を読み込み、リサイズする 保留
+        // $img = Image::make($coffee)->resize(300, 200);
         $coffee->sweetness_level = $request->input('sweetness_level');
         $coffee->bitterness_level = $request->input('bitterness_level');
         //DBに保存
@@ -96,13 +101,14 @@ class CoffeeController extends Controller
         $request->validate(
             [
                 'title' => ['required', 'unique:posts'],
-                'sweetness_level' => ['required'],
-                'bitterness_level' => ['required'],
+                'image' => ['required', 'image'],
+                'sweetness_level' => ['required', 'integer'],
+                'bitterness_level' => ['required', 'integer'],
             ],
             [
                 'title.required' => 'タイトルは必須です。',
                 'image.required' => '画像は必須です。',
-                'sweetness_level.required' => '甘さは必須です。',
+                'sweetness_level.required.integer' => '甘さは必須です。',
                 'bitterness_level.required' => '苦さは必須です。',
             ]
         );
