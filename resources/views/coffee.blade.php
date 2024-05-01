@@ -1,52 +1,46 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>一覧画面</title>
-</head>
-<body>
-  <h1>一覧画面</h1>
-  {{-- 検索機能ここから --}}
-  <div>
-    <form action="{{ route('coffee.index') }}" method="GET">
-      <input type="text" name="keyword" value="{{ $keyword }}">
-      <input type="submit" value="検索">
-    </form>
+@extends('layouts.app')
+@section('content')
+
+  <div class="container">
+    <h1 class="text-center mt-3">一覧画面</h1>
+
+    <!-- 検索フォーム -->
+    <div class="row justify-content-center mb-3">
+      <div class="col-sm-4">
+        <form action="{{ route('coffee.index') }}" method="GET" class="form-inline justify-content-center">
+          <div class="input-group"> <!-- input-groupを追加 -->
+            <input type="text" name="keyword" value="{{ $keyword }}" class="form-control mr-sm-2">
+            <div class="input-group-append"> <!-- input-group-appendを追加 -->
+              <button type="submit" class="btn btn-primary">検索</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <h2 class="text-center coffee-menu">
+      <span>Coffee Menu</span>
+      <a href="{{ route('coffee.create') }}" class="btn btn-success ml-2">新規作成</a>
+      <a href="{{ route('timeline.index') }}" class="btn btn-info ml-2">投稿一覧</a>
+    </h2>
+
+    <!-- メニューテーブル -->
+    <div class="row">
+      @forelse ($posts as $post)
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ $post->name }}</h5>
+              <p class="card-text">ベース: {{ $post->base }}</p>
+              <a href="{{ route('coffee.show',['id'=>$post->id]) }}" class="btn btn-primary">詳細</a>
+            </div>
+          </div>
+        </div>
+      @empty
+        <div class="col-md-12">
+          <p>No posts!!</p>
+        </div>
+      @endforelse
+    </div>
   </div>
-  {{-- 検索機能ここまで --}}
-
-  <h1>
-    <span>Coffee Menu</span>
-    <a href="{{ route('coffee.create') }}">{{ __('新規作成') }}</a>
-    <a href="{{ route('timeline.index') }}">{{ __('投稿一覧') }}</a>
-  </h1>
-
-  <table>
-    <tr>
-      <th>メニュー名</th>
-      <th>ベース</th>
-      <th></th>
-    </tr>
-
-  {{-- 保存されているレコードを一覧表示 --}}
-    @forelse ($posts as $post)
-      <tr>
-        <td>
-          {{-- 「http:(ドメイン)/coffee/{id}」 へアクセスするリンクを作る --}}
-          {{-- <a href="coffee/show/{{ $post->id }}"> --}}
-            <a href="{{route('coffee.show',['id'=>$post->id])}}">
-            {{ $post->name }}
-          </a>
-        </td>
-        <td>{{ $post->base }}</td>
-        </td>
-      </tr>
-    @empty
-      <td>No posts!!</td>
-    @endforelse
-  </table>
-
-</body>
-</html>
+@endsection
