@@ -9,5 +9,7 @@ class Coffee extends Model
 {
     use HasFactory;
 
+    protected $table ='coffees';
+
     public $guarded = ['id', 'created_at'];
 }
