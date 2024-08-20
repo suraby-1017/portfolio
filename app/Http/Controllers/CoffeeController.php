@@ -43,7 +43,7 @@ class CoffeeController extends Controller
 
     public function store(Request $request)
     {
-
+        // dd($request->all()); 処理を止めて値を出力
         $request->validate(
             [
                 'title' => ['required', 'unique:coffees'], //coffeesテーブルに同じ'title'の値がないか判定 'unique:'
